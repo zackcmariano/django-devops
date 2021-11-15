@@ -1,3 +1,4 @@
+#continuous integration/continuous delivery for django
 image: "python:3.8-slim"
 
 before_script:
