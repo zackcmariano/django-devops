@@ -10,7 +10,7 @@ stages:
 test:
  stage: test
  script:
-   - virtualenv civenv
+   - python3 -m venv civenv/
    - source civenv/bin/activate
    - pip install requirements.txt
    - python manage.py makemigrations
