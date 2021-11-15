@@ -10,7 +10,7 @@ stages:
 test:
  stage: test
  script:
-   - python3 -m venv civenv/
+   - virtualenv civenv
    - source civenv/bin/activate
    - pip install requirements.txt
    - python manage.py makemigrations
@@ -20,4 +20,4 @@ test:
 pep8:
   stage: analysis
   script:
-    - pycodestyle manage.py
+    - pycodestyle core/views.py
