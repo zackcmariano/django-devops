@@ -24,20 +24,22 @@ pep8:
   script:
     - pip freeze
 
-build_standard_docker:
-  image: docker:19.03
+Docker Build:
   stage: deploy
+  image: docker:latest
   services:
-    - docker:19.03.0
-  variables:
-    DOCKER_HOST: tcp://docker:2377/
-    DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
-  only:
-    - master
-    - main
+    - docker:dind
+  before_script:
+    - export DOCKER_TAG=latest
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY_DOCKER
+  
   script:
-    - TAG="$CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -f Dockerfile -t $TAG .
-    - docker push $TAG
+    - docker build -t "registry.gitlab.com/zackcmariano/django-devops:$DOCKER_TAG" .
+    - docker push "registry.gitlab.com/zackcmariano/django-devops:$DOCKER_TAG"
+
+
+  #script:
+    #- TAG="$CI_REGISTRY/$CI_PROJECT_PATH:$CI_COMMIT_REF_NAME"
+    #- docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    #- docker build -f Dockerfile -t $TAG .
+    #- docker push $TAG
