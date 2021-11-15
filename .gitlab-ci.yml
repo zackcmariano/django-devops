@@ -10,8 +10,8 @@ stages:
 test:
  stage: test
  script:
-   - python3 -m venv venv/
-   - source venv/bin/activate
+   - python3 -m venv civenv/
+   - source civenv/bin/activate
    - pip install django
    - python manage.py makemigrations
    - python manage.py migrate
@@ -20,4 +20,4 @@ test:
 pep8:
   stage: analysis
   script:
-    - pycodestyle core/apps.py
+    - pycodestyle core/views.py
