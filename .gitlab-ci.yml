@@ -24,12 +24,12 @@ pep8:
     - pip freeze
 
 build_standard_docker:
-  image: docker:19.03.8
+  image: docker:19.03
   stage: deploy
   services:
-    - docker:19.03.0-dind
+    - docker:19.03.0
   variables:
-    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_HOST: tcp://docker:2377/
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
   only:
