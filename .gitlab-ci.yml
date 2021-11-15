@@ -1,12 +1,14 @@
-#continuous integration/continuous delivery for django
 image: "python:3.8-slim"
+
 
 before_script:
   - python3 --version
 
+
 stages:
   - analysis
   - test
+
 
 test:
  stage: test
@@ -17,6 +19,7 @@ test:
    - python manage.py makemigrations
    - python manage.py migrate
    - python manage.py test
+
 
 pep8:
   stage: analysis
