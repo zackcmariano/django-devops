@@ -15,15 +15,14 @@ activate:
    - source civenv/bin/activate
    - pip install --upgrade pip
    - pip install -r requirements.txt
-   - alias manage='python $VIRTUAL_ENV/../manage.py'
-   - manage makemigrations
-   - manage migrate
+   - python manage.py makemigrations
+   - python manage.py migrate
   #- python manage.py test
 
 test:
   stage: test
   script:
-    - manage test
+    - python manage.py test
 
 Docker Build:
   stage: deploy
