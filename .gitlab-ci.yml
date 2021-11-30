@@ -22,6 +22,8 @@ activate:
 test:
   stage: test
   script:
+    - python3 -m venv civenv/
+    - source civenv/bin/activate
     - python manage.py test
 
 Docker Build:
