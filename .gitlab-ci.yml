@@ -4,25 +4,26 @@ before_script:
   - python3 --version
 
 stages:
-  - analysis
+  - activate
   - test
   - deploy
 
-test:
- stage: test
+activate:
+ stage: activate
  script:
    - python3 -m venv civenv/
    - source civenv/bin/activate
    - pip install --upgrade pip
    - pip install -r requirements.txt
-   - python manage.py makemigrations
-   - python manage.py migrate
-   - python manage.py test
+   - alias manage='python $VIRTUAL_ENV/../manage.py'
+   - manage makemigrations
+   - manage migrate
+  #- python manage.py test
 
-pep8:
-  stage: analysis
+test:
+  stage: test
   script:
-    - pip freeze
+    - manage test
 
 Docker Build:
   stage: deploy
