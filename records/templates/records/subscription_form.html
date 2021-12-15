@@ -1,0 +1,20 @@
+<h1>Cadastrar um novo Vídeo</h1>
+<form action="." method="post">
+    {% csrf_token %}
+    <p>
+        <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+        {{ form.title.errors }}
+        {{ form.title }}
+    </p>
+    <p>
+        <label for="{{ form.url_video.id_for_label }}">{{ form.url_video.label }}</label>
+        {{ form.url_video.errors }}
+        {{ form.url_video }}
+    </p>
+    <p>
+        <label for="{{ form.texto.id_for_label }}">{{ form.texto.label }}</label>
+        {{ form.texto.errors }}
+        {{ form.texto }}
+    </p>
+    <input type="submit" value="Enviar!"/>
+</form>
