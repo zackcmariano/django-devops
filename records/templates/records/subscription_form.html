@@ -1,4 +1,9 @@
 <h1>Cadastrar um novo Vídeo</h1>
+{% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
 <form action="." method="post">
     {% csrf_token %}
     <p>

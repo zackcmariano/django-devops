@@ -35,3 +35,23 @@ class SubscribeTest(TestCase):
         """Form must have 4 fields."""
         form = self.response.context['form']
         self.assertSequenceEqual(['title', 'url_video', 'texto'], list(form.fields))
+
+
+class SubscribePostTest(TestCase):
+    def setUp(self):
+        data = dict(title='Homem-Aranha - Sem Volta Para Casa | Trailer 2', url_video='https://www.youtube.com/watch?v=ae6w0-kZ3-M', 
+                    texto='Somos o melhor destino para quem busca trailers assim que eles são lançados.' )
+        self.response =  self.client.post('/register/', data)
+
+    def test_post(self):
+        """Valid POST should redirect to /register/"""
+        self.assertEqual(302, self.response.status_code)
+
+
+class SubscribeSucessMessage(TestCase):
+    def test_message(self):
+        data = dict(title='Homem-Aranha - Sem Volta Para Casa | Trailer 2', url_video='https://www.youtube.com/watch?v=ae6w0-kZ3-M', 
+                    texto='Somos o melhor destino para quem busca trailers assim que eles são lançados.' )
+
+        response = self.client.post('/register/', data, follow=True)
+        self.assertContains(response, 'Novo vídeo cadastrado com sucesso!')     
