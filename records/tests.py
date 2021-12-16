@@ -54,4 +54,4 @@ class SubscribeSucessMessage(TestCase):
                     texto='Somos o melhor destino para quem busca trailers assim que eles são lançados.' )
 
         response = self.client.post('/register/', data, follow=True)
-        self.assertContains(response, 'Novo vídeo cadastrado com sucesso!')     
+        self.assertContains(response, 'Novo vídeo cadastrado com sucesso!')  
