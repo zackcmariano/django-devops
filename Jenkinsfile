@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image - APP DJANGO') {
             steps {
                 script {
-                    dockerapp = docker.build("zackcmariano/django-devops:versao.${env.BUILD_ID}", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("zackcmariano/django-devops:version.${env.BUILD_ID}", '-f ./Dockerfile ./')
                 }
             }
         }
@@ -15,7 +15,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'dockerhub') {
                         dockerapp.push('latest')
-                        dockerapp.push("${env.BUILD_ID}")          
+                        dockerapp.push("version.${env.BUILD_ID}")          
                     }
                 }
             }
