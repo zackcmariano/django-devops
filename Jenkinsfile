@@ -12,7 +12,7 @@ pipeline {
 
         stage ('Push Image - Docker') {
             steps {
-                docker.withRegistry('https://registry.gitlab.com', 'gitlab') {
+                docker.withRegistry('https://gitlab.com/zackcmariano/django-devops/container_registry/2478017', 'gitlab') {
                     dockerapp.push('latest')
                     dockerapp.push('${env.BUILD_ID}')          
                 }
