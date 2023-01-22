@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage ('Inicial') {
+        stage ('Build Image - APP DJANGO') {
             steps {
-                echo 'Iniciando a pipeline'
+                script {
+                    dockerapp = docker.build("registry.gitlab.com/zackcmariano/django-devops:devops", '-f ./Dockerfile ./')
+                }
             }
         }
     } 
