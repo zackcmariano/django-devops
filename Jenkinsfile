@@ -5,14 +5,14 @@ pipeline {
         stage ('Build Image - APP DJANGO') {
             steps {
                 script {
-                    dockerapp = docker.build("registry.gitlab.com/zackcmariano/django-devops:devops.${env.BUILD_ID}", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("django-devops:v.${env.BUILD_ID}", '-f ./Dockerfile ./')
                 }
             }
         }
 
         stage ('Push Image - Docker') {
             steps {
-                docker.withRegistry('https://gitlab.com/zackcmariano/django-devops/container_registry/2478017', 'gitlab') {
+                docker.withRegistry('https://registry.hub.docker.com', 'hubdocker') {
                     dockerapp.push('latest')
                     dockerapp.push('${env.BUILD_ID}')          
                 }
