@@ -5,7 +5,7 @@ pipeline {
         stage ('Build Image - APP DJANGO') {
             steps {
                 script {
-                    dockerapp = docker.build("zackcmariano/django-devops:${env.BUILD_ID}", '-f ./Dockerfile ./')
+                    dockerapp = docker.build("zackcmariano/django-devops:versao.0.${env.BUILD_ID}", '-f ./Dockerfile ./')
                 }
             }
         }
