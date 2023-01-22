@@ -20,5 +20,12 @@ pipeline {
                 }
             }
         }
+
+        stage ('Deploy Kubernetes') {
+            steps {
+                echo '========== Loading KUBERNETES ... ... '
+            }
+        }
+
     } 
 }
