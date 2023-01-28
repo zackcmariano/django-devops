@@ -32,8 +32,8 @@ pipeline {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/config.yaml'
                     sh 'kubectl apply -f ./k8s/config.yaml'
                 }
-            }*/
-        }
+            }
+        } */
 
     } 
 }
