@@ -2,3 +2,4 @@ civenv
 db.sqlite3
 server.conf
 key_minikube
+kube_config.yaml
