@@ -35,6 +35,7 @@ pipeline {
             }*/
             steps {
                 withKubeConfig ([credentialsId: 'kubeconfig']) {
+                    sh 'sudo -p ${env.PASSW_SERVER} sudo usermod -aG docker $USER && newgrp docker'
                     sh 'kubectl apply -f ./k8s/deployment.yaml'
                 }
             }
