@@ -11,6 +11,7 @@ pipeline {
         tag_version = "version.${env.BUILD_ID}"
 
         CLUSTER_NAME_MONIT = 'monitoramento-app'
+        CREDENTIALS_ID_MONIT = 'grafana'
     }
 
     stages {
@@ -68,7 +69,7 @@ pipeline {
                 echo "Observability started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_MONIT, location: env.LOCATION, manifestPattern: './monitoramento/dep-prometheus-grafana.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_MONIT, location: env.LOCATION, manifestPattern: './monitoramento/dep-prometheus-grafana.yaml', credentialsId: env.CREDENTIALS_ID_MONIT, verifyDeployments: true])
                 echo "Stage Observability Finished"
             }
         }
