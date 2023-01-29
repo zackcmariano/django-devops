@@ -69,11 +69,11 @@ pipeline {
                 echo "Observability started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
-                echo "===================================="
-                echo "===================================="
-                echo "===   ** PIPE EM CONSTRUÇÃO **   ==="
-                echo "===================================="
-                echo "===================================="
+                echo "============================================================================"
+                echo "============================================================================"
+                echo "===================     ** STAGE EM CONSTRUÇÃO **     ======================"
+                echo "============================================================================"
+                echo "============================================================================"
                 /*step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME_MONIT, location: env.LOCATION, manifestPattern: './monitoramento/dep-prometheus-grafana.yaml', credentialsId: env.CREDENTIALS_ID_MONIT, verifyDeployments: true])
                 echo "Stage Observability Finished"*/
             }
