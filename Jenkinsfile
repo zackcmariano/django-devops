@@ -7,6 +7,8 @@ pipeline {
         CLUSTER_NAME = 'jenk-gke'
         LOCATION = 'us-central1-a'
         CREDENTIALS_ID = 'gcp-kube'
+
+        tag_version = "version.${env.BUILD_ID}"
     }
 
     stages {
@@ -48,10 +50,6 @@ pipeline {
             } */
 
             steps {
-                environment {
-                tag_version = "version.${env.BUILD_ID}"
-                }
-
                 echo "Deployment started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
