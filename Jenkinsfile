@@ -35,7 +35,7 @@ pipeline {
             }*/
             steps {
                 withKubeConfig ([credentialsId: 'kubeconfig']) {
-                    sh 'sudo -p "Manu101018" kubectl apply -f ./k8s/deployment.yaml'
+                    sh 'sudo -S "Manu101018" kubectl apply -f ./k8s/deployment.yaml'
                 }
             }
         }
