@@ -48,10 +48,14 @@ pipeline {
             } */
 
             steps {
+                environment {
+                tag_version = "version.${env.BUILD_ID}"
+                }
+
                 echo "Deployment started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
-                sh "sed -i 's/tagversion/${env.BUILD_ID}/g' ./k8s/deployment.yaml"
+                sh "sed -i 's/{{tag}}/$tag_version/g' ./k8s/deployment.yaml"
                 step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: './k8s/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
                 echo "Deployment Finished"
             }
