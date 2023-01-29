@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    environment {
+
+        PROJECT_ID = 'terra-analytics-374723'
+        CLUSTER_NAME = 'jenk-gke'
+        LOCATION = 'us-central1-a'
+        CREDENTIALS_ID = 'gcp-kube'
+    }
+
     stages {
         stage ('Build Image - APP DJANGO') {
             steps {
@@ -32,11 +40,20 @@ pipeline {
                     sh 'sed -i "s/{{tag}}/$tag_version/g" ./k8s/deployment.yaml'
                     sh 'kubectl apply -f ./k8s/deployment.yaml'
                 }
-            }*/
+            }
             steps {
                 withKubeConfig ([credentialsId: 'kubeconfig']) {
                     sh 'kubectl apply -f ./k8s/deployment.yaml'
                 }
+            } */
+
+            steps {
+                echo "Deployment started ..."
+                sh 'ls -ltr'
+                sh 'pwd'
+                sh "sed -i 's/tagversion/${env.BUILD_ID}/g' ./k8s/deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: './k8s/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                echo "Deployment Finished"
             }
         }
 
